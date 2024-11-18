@@ -5,6 +5,25 @@ import { comparePassword, hashPassword } from "../helpers/passwordHelper";
 import { createToken } from "../helpers/tokenHelper";
 
 class AuthController {
+  async uploadPDP(req: NextRequest) {
+    try {
+      const formData = await req.formData();
+      const file = formData.get("pdp");
+      console.log(file);
+
+      return NextResponse.json(
+        { message: "File uploaded successfully" },
+        { status: 200 }
+      );
+    } catch (err) {
+      console.error(err);
+      return NextResponse.json(
+        { message: "Internal Server Error" },
+        { status: 500 }
+      );
+    }
+  }
+
   async register(req: NextRequest) {
     try {
       const data = await req.json();
@@ -38,8 +57,8 @@ class AuthController {
         { message: "Account created successfully", token },
         { status: 201 }
       );
-    } catch (error) {
-      console.error(error);
+    } catch (err) {
+      console.error(err);
       return NextResponse.json(
         { message: "Internal Server Error" },
         { status: 500 }
@@ -86,8 +105,8 @@ class AuthController {
         { message: "User authentificated successfully", token },
         { status: 200 }
       );
-    } catch (error) {
-      console.error(error);
+    } catch (err) {
+      console.error(err);
       return NextResponse.json(
         { message: "Internal Server Error" },
         { status: 500 }
