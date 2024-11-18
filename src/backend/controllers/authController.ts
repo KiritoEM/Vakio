@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { checkUser } from "../helpers/AuthHelpers";
+import { checkUser } from "../helpers/userHelpers";
 import { prisma } from "../../lib/prisma";
-import { comparePassword, hashPassword } from "../../lib/bcrypt";
+import { comparePassword, hashPassword } from "../helpers/passwordHelper";
+import { createToken } from "../helpers/tokenHelper";
 
 class AuthController {
   async register(req: NextRequest) {
@@ -31,8 +32,10 @@ class AuthController {
         },
       });
 
+      const token = createToken(user.id);
+
       return NextResponse.json(
-        { message: "Account created successfully", user },
+        { message: "Account created successfully", token },
         { status: 201 }
       );
     } catch (error) {
@@ -77,9 +80,11 @@ class AuthController {
         );
       }
 
+      const token = createToken(user.id);
+
       return NextResponse.json(
-        { message: "User authentificated successfully", user },
-        { status: 201 }
+        { message: "User authentificated successfully", token },
+        { status: 200 }
       );
     } catch (error) {
       console.error(error);
