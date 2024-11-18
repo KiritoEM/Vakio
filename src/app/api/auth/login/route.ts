@@ -1,3 +1,3 @@
 import authController from "@/backend/controllers/authController";
 
-export const POST = authController.register;
+export const POST = authController.login;
