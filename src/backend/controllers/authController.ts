@@ -10,11 +10,11 @@ class AuthController {
     req: NextRequest,
     { params }: { params: Promise<{ id: string }> }
   ) {
-    try {
-      const id = (await params).id;
-      const formData = await req.formData();
-      const file = formData.get("pdp") as File;
+    const id = (await params).id;
+    const formData = await req.formData();
+    const file = formData.get("pdp") as File;
 
+    try {
       const user = await prisma.user.findUnique({
         where: { id: parseInt(id) },
       });
@@ -145,5 +145,4 @@ class AuthController {
   }
 }
 
-const authController = new AuthController();
-export default authController;
+export default new AuthController();

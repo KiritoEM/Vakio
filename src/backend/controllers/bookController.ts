@@ -1,5 +1,7 @@
+import { NextRequest } from "next/server";
+
 class BookController {
-    async 
+  async postBook(req: NextRequest) {}
 }
 
 export default new BookController();

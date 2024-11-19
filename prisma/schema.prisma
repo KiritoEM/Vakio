@@ -22,3 +22,11 @@ model User {
   profilePicture String? @default("")
 }
 
+model Book {
+  id Int @id @default(autoincrement())
+  title String
+  resume String
+  rating Int?
+  author Int @relation()
+}
+
