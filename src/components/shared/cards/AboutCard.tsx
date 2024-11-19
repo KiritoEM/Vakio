@@ -1,15 +1,32 @@
 "use client";
 
 import { Card, CardDescription, CardTitle } from "@/components/UI/card";
+import { cn } from "@/lib/utils";
 import React, { FC } from "react";
 
-const AboutCard: FC = (): JSX.Element => {
+interface AboutTypes{
+  aboutId: string;
+  title: string;
+  description: string;
+}
+
+const AboutCard: FC<AboutTypes> = ({
+  aboutId,
+  title,
+  description,
+ 
+}): JSX.Element => {
   return (
-    <Card>
-      <CardTitle>
-        <span className="text-primary">01</span>blsjdhzkdhkhkhdhkhq
+    <Card
+      className={cn("bg-transparent border-none", aboutId === "02" && "ml-5")}
+      
+    >
+      <CardTitle className="text-white text-[28px] font-medium">
+        <span className="text-primary">{aboutId}</span>  {title}
       </CardTitle>
-      <CardDescription className="text-[#FFFFCC]">ododjqljdlqjq</CardDescription>
+      <CardDescription className="text-[#FFFFFFCC]">
+        {description}
+      </CardDescription>
     </Card>
   );
 };

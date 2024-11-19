@@ -7,10 +7,10 @@ import React from "react";
 const Hero = () => {
   return (
     <section className="section-hero w-full h-full py-20 overflow-hidden">
-      <div className="flex flex-col items-center justify-center text-center gap-10">
+      <div className="landing-hero flex flex-col items-center justify-center text-center gap-10">
         <div className="flex flex-col w-[60%] font-rocknroll">
           <h2 className="text-[35px] text-primary">Bienvenue sur Vakio</h2>
-          <h1 className=" text-[10vh] text-primary-foreground leading-tight">
+          <h1 className=" text-[10vh] leading-tight">
             Plongez dans l'univers captivant des Livres
           </h1>
         </div>
@@ -22,7 +22,7 @@ const Hero = () => {
         <Button className="bg-white text-black rounded-full">
           Découvrir nos livres
         </Button>
-        <div className="absolute bottom-20 right-0 w-[300px] flex flex-col items-start text-start">
+        <div className="absolute bottom-20 right-20 w-[300px] flex flex-col items-start text-start">
           <p>“La lecture, une porte ouverte sur un monde enchanté.”</p>
           <h3>François Mauriac</h3>
         </div>

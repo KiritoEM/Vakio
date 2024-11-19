@@ -4,7 +4,7 @@ type NavListType =  {
     url:string,
 }
 type AboutListType ={
-    id:number,
+    aboutId:string,
     title:string,
     description:string,
 }

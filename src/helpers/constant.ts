@@ -25,20 +25,20 @@ const NAV_LIST: NavListType[] = [
 
 const ABOUT_LIST: AboutListType[] = [
   {
-    id: 1,
+    aboutId: "01",
     title: "Diversifités de livres",
     description:
       "Découvrez une vaste collection de livres couvrant tous les genres et styles pour satisfaire tous les goûts, des classiques intemporels aux nouveautés captivantes.",
   },
   {
-    id: 2,
+    aboutId: "02",
     title: "Recommandations de livres",
     description:
       "Profitez d’un système intelligent qui vous suggère des livres adaptés à vos préférences pour une découverte enrichissante.",
   },
   {
-    id: 3,
-    title: "03  Scan de livres par IA",
+    aboutId: "03",
+    title: "Scan de livres par IA",
     description:
       "Scannez la couverture d’un livre et obtenez les informations complètes sur le livre s’il est disponible dans notre base de données",
   },
