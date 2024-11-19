@@ -1,16 +1,16 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import LandingNav from "@/components/shared/navBars/LandingNav";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
+const RocknRollOne = localFont({
+  src: "./fonts/RocknRollOne-Regular.ttf",
   variable: "--font-geist-sans",
-  weight: "100 900",
 });
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
+const Urbanist = localFont({
+  src: "./fonts/Urbanist-VariableFont_wght.ttf",
   variable: "--font-geist-mono",
-  weight: "100 900",
+  weight: "500",
 });
 
 export const metadata: Metadata = {
@@ -26,9 +26,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={` ${Urbanist.className} ${RocknRollOne.className} antialiased bg-black text-white`}
       >
-        {children}
+        <header>
+          <LandingNav />
+        </header>
+        <main>{children}</main>
       </body>
     </html>
   );
