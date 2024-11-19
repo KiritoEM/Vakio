@@ -12,4 +12,10 @@ const createToken = (id: number) => {
   return token;
 };
 
-export { createToken };
+const decodeToken = async (token: string) => {
+  const payload = await jwt.verify(token, SECRET_KEY);
+
+  return payload;
+};
+
+export { createToken, decodeToken };

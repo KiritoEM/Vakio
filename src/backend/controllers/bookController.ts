@@ -1,8 +1,8 @@
-import { NextRequest } from "next/server";
+import { BearerNextRequest, NextResponse } from "next/server";
 
 class BookController {
-  async postBook(req: NextRequest) {
-    
+  async postBook(req: BearerNextRequest) {
+    return NextResponse.json({ status: 200 });
   }
 }
 
