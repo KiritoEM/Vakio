@@ -20,6 +20,7 @@ model User {
   name String
   email String @unique
   profilePicture String? @default("")
+  books Book[]
 }
 
 model Book {
@@ -27,6 +28,10 @@ model Book {
   title String
   resume String
   rating Int?
-  author Int @relation()
+  publishedAt DateTime
+  genres Json
+
+  userId Int
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
