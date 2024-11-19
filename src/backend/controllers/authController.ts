@@ -28,7 +28,7 @@ class AuthController {
     try {
       const data = await req.json();
 
-      if (!data.email || !data.password || !data.pseudo) {
+      if (!data.email || !data.password || !data.pseudo || !data.name) {
         return NextResponse.json(
           { message: "All fields are required" },
           { status: 400 }
