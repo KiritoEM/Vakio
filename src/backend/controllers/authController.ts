@@ -3,10 +3,9 @@ import { checkUser } from "../helpers/userHelpers";
 import { prisma } from "../../lib/prisma";
 import { comparePassword, hashPassword } from "../helpers/passwordHelper";
 import { createToken } from "../helpers/tokenHelper";
+import { uploadFile } from "@/lib/uploadFile";
 
 class AuthController {
-  public uploadDir: String = "public/uploads";
-
   async uploadPDP(
     req: NextRequest,
     { params }: { params: Promise<{ id: string }> }
@@ -34,10 +33,12 @@ class AuthController {
         );
       }
 
-      // const updatedUser = await prisma.user.update({
-      //   where: { id: parseInt(id) },
-      //   data: { profilePicture: `/uploads/${file.filename}` },
-      // });
+      const filePath = await uploadFile(file, "public/uploads", "image");
+
+      const updatedUser = await prisma.user.update({
+        where: { id: parseInt(id) },
+        data: { profilePicture: filePath },
+      });
 
       return NextResponse.json(
         { message: "Profile picture uploaded successfully" },
@@ -51,6 +52,7 @@ class AuthController {
       );
     }
   }
+
   async register(req: NextRequest) {
     try {
       const data = await req.json();
@@ -130,7 +132,7 @@ class AuthController {
       const token = createToken(user.id);
 
       return NextResponse.json(
-        { message: "User authentificated successfully", token },
+        { message: "User authenticated successfully", token },
         { status: 200 }
       );
     } catch (err) {
@@ -143,4 +145,5 @@ class AuthController {
   }
 }
 
-export default new AuthController();
+const authController = new AuthController();
+export default authController;

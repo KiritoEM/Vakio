@@ -5,19 +5,23 @@ const uploadFile = async (
   file: File,
   uploadDir: string,
   uploadType: "image" | "video"
-) => {
+): Promise<string> => {
   if (
-    (uploadType !== "image" && file.type.startsWith("image")) ||
-    (uploadType !== "video" && file.type.startsWith("video"))
+    (uploadType === "image" && !file.type.startsWith("image")) ||
+    (uploadType === "video" && !file.type.startsWith("video"))
   ) {
-    alert("Veuillez vérifiez les fichiers que vous avez téléchargés");
+    throw new Error("Please verify the files you have uploaded");
   }
+
   const arrayBuffer = await file.arrayBuffer();
   const buffer = new Uint8Array(arrayBuffer);
 
-  await fs.writeFile(`${uploadDir}${file.name}`, buffer);
+  const filePath = `${uploadDir}/${file.name}`;
+  await fs.writeFile(filePath, buffer);
 
   revalidatePath("/");
+
+  return filePath;
 };
 
 export { uploadFile };
