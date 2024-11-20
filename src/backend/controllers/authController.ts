@@ -41,7 +41,7 @@ class AuthController {
       });
 
       return NextResponse.json(
-        { message: "Profile picture uploaded successfully" },
+        { message: "Profile picture uploaded successfully", updatedUser },
         { status: 200 }
       );
     } catch (error) {
@@ -55,16 +55,16 @@ class AuthController {
 
   async register(req: NextRequest) {
     try {
-      const data = await req.json();
+      const { email, password, name, pseudo } = await req.json();
 
-      if (!data.email || !data.password || !data.pseudo || !data.name) {
+      if (!email || !password || !pseudo || !name) {
         return NextResponse.json(
           { message: "All fields are required" },
           { status: 400 }
         );
       }
 
-      const userExists = await checkUser(data.email);
+      const userExists = await checkUser(email);
       if (userExists) {
         return NextResponse.json(
           { message: "User already registered" },
@@ -74,10 +74,10 @@ class AuthController {
 
       const user = await prisma.user.create({
         data: {
-          email: data.email,
-          password: await hashPassword(data.password),
-          pseudo: data.pseudo,
-          name: data.name,
+          email: email,
+          password: await hashPassword(password),
+          pseudo: pseudo,
+          name: name,
         },
       });
 
@@ -98,9 +98,9 @@ class AuthController {
 
   async login(req: NextRequest) {
     try {
-      const data = await req.json();
+      const { email, password } = await req.json();
 
-      if (!data.email || !data.password) {
+      if (!email || !password) {
         return NextResponse.json(
           { message: "All fields are required" },
           { status: 400 }
@@ -109,7 +109,7 @@ class AuthController {
 
       const user = await prisma.user.findUnique({
         where: {
-          email: data.email,
+          email: email,
         },
       });
 
@@ -120,7 +120,7 @@ class AuthController {
         );
       }
 
-      const isPasswordValid = comparePassword(data.password, user.password);
+      const isPasswordValid = comparePassword(password, user.password);
 
       if (!isPasswordValid) {
         return NextResponse.json(
