@@ -24,11 +24,12 @@ model User {
 }
 
 model Book {
+  cover String? @default("")
   id Int @id @default(autoincrement())
   title String
-  resume String
+  description String @db.Text
   rating Int?
-  publishedAt DateTime
+  publishedAt DateTime @default(now())
   genres Json
 
   userId Int
